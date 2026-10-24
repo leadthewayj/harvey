@@ -60,7 +60,9 @@ class Brain:
             "claude", "-p", prompt,
             # JSON output carries exact token/cost accounting per call.
             "--output-format", "json",
-            "--dangerously-skip-permissions",
+            # Prompts carry scraped pages and inbound replies. Claude only
+            # ever returns text here, so give it no tools to be talked into.
+            "--tools", "",
         ]
         if session_id:
             # The CLI only accepts UUIDs for --session-id; callers pass
